@@ -16,27 +16,27 @@ impl Repository<Adviceslip> for AdviceslipRepository {
         let conn = get_connection()?;
 
         let mut stmt = conn.prepare("SELECT id, advice FROM adviceslip")?;
-        let chuck_norris_iter = stmt.query_map([], |row| {
+        let adviceslip_iter = stmt.query_map([], |row| {
             Ok(Adviceslip {
                 id: row.get(0)?,
                 advice: row.get(1)?,
             })
         })?;
 
-        let mut chucks = Vec::new();
+        let mut adviceslips = Vec::new();
 
-        for chuck in chuck_norris_iter {
-            chucks.push(chuck.unwrap());
+        for adviceslip in adviceslip_iter {
+            adviceslips.push(adviceslip.unwrap());
         }
 
-        Ok(chucks)
+        Ok(adviceslips)
     }
 
     fn get(self, id: String) -> Result<Adviceslip, Error> {
         let conn = get_connection()?;
 
         let mut stmt = conn.prepare("SELECT id, advice FROM adviceslip where id = :id")?;
-        let chuck_norris = stmt
+        let adviceslip = stmt
             .query_map(&[(":id", &id)], |row| {
                 Ok(Adviceslip {
                     id: row.get(0)?,
@@ -45,8 +45,8 @@ impl Repository<Adviceslip> for AdviceslipRepository {
             })?
             .last();
 
-        match chuck_norris {
-            Some(chuck) => chuck,
+        match adviceslip {
+            Some(advice) => advice,
             None => Err(Error::QueryReturnedNoRows),
         }
     }
