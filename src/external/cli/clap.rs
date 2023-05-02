@@ -7,6 +7,9 @@ pub struct Cli {
     #[arg(short, long)]
     pub api_name: String,
 
+    /// if it'll save the request
+    pub save_request: Option<bool>,
+
     /// if it'll execute migrations
     #[arg(short, long)]
     pub migration: Option<bool>,

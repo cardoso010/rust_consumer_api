@@ -1,15 +1,11 @@
 use reqwest::Error;
 use serde::{Deserialize, Serialize};
 
+use crate::domain::entities::adviceslip::Adviceslip;
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Slip {
     slip: Adviceslip,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Adviceslip {
-    id: i64,
-    advice: String,
 }
 
 impl Adviceslip {

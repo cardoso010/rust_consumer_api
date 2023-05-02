@@ -1,17 +1,9 @@
 use rusqlite::{Error, Result};
 
+use crate::domain::entities::chucknorris::ChuckNorris;
+
 use super::repository::Repository;
 use crate::external::database::connection::get_connection;
-
-#[derive(Debug)]
-pub struct ChuckNorris {
-    categories: Vec<String>,
-    created_at: String,
-    icon_url: String,
-    id: String,
-    updated_at: String,
-    url: String,
-}
 
 pub struct ChucknorrisRepository;
 
@@ -70,8 +62,9 @@ impl Repository<ChuckNorris> for ChucknorrisRepository {
         let conn = get_connection()?;
 
         conn.execute(
-            "INSERT INTO chucknorris (icon_url, url, created_at, updated_at) VALUES (?1, ?2)",
+            "INSERT INTO chucknorris (id, icon_url, url, created_at, updated_at) VALUES (?1, ?2)",
             (
+                &data.id,
                 &data.icon_url,
                 &data.url,
                 &data.created_at,

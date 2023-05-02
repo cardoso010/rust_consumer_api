@@ -1,7 +1,10 @@
 use reqwest::Error;
 
-use crate::external::http::adviceslip::adviceslip_api::{Adviceslip, Slip};
-use crate::external::http::chucknorris::chucknorris_api::ChuckNorris;
+use crate::domain::entities::{adviceslip::Adviceslip, chucknorris::ChuckNorris};
+use crate::external::database::repositories::{
+    adviceslip_respository::AdviceslipRepository, chucknorris_repository::ChucknorrisRepository,
+};
+use crate::external::http::adviceslip::adviceslip_api::Slip;
 
 #[derive(Debug)]
 enum Response {
@@ -9,7 +12,7 @@ enum Response {
     Advise(Slip),
 }
 
-pub async fn execute(consumer_api: String) {
+pub async fn execute(consumer_api: String, save_request: bool) {
     match get_response(consumer_api).await {
         Ok(Response::Chuck(chuck)) => println!("ChuckNorris: {:?}", chuck),
         Ok(Response::Advise(advise)) => println!("Advise: {:?}", advise),

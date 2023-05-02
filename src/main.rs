@@ -1,4 +1,5 @@
 mod application;
+mod domain;
 mod external;
 
 use clap::Parser;
@@ -11,9 +12,9 @@ use crate::external::database::migrations;
 async fn main() {
     let cli = Cli::parse();
 
-    consumer_api::execute(cli.api_name).await;
-
     if cli.migration.unwrap() {
         migrations::execute().expect("Error to perform migrations!");
     }
+
+    consumer_api::execute(cli.api_name, cli.save_request.is_some()).await;
 }

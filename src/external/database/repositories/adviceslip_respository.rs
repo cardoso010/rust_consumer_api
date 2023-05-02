@@ -1,13 +1,8 @@
 use rusqlite::{Error, Result};
 
 use super::repository::Repository;
+use crate::domain::entities::adviceslip::Adviceslip;
 use crate::external::database::connection::get_connection;
-
-#[derive(Debug)]
-pub struct Adviceslip {
-    id: i64,
-    advice: String,
-}
 
 pub struct AdviceslipRepository;
 
@@ -51,12 +46,12 @@ impl Repository<Adviceslip> for AdviceslipRepository {
         }
     }
 
-    fn save(self, chuck: &Adviceslip) -> Result<usize> {
+    fn save(self, data: &Adviceslip) -> Result<usize> {
         let conn = get_connection()?;
 
         conn.execute(
             "INSERT INTO adviceslip (id, advice) VALUES (?1, ?2)",
-            (&chuck.id, &chuck.advice),
+            (&data.id, &data.advice),
         )
     }
 
