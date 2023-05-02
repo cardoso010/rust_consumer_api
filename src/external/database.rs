@@ -1,1 +1,3 @@
-pub mod chucknorris_repository;
+mod connection;
+pub mod migrations;
+pub mod repositories;

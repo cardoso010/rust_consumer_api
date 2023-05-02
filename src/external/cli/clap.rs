@@ -6,6 +6,10 @@ pub struct Cli {
     /// Name of the consumir api
     #[arg(short, long)]
     pub api_name: String,
+
+    /// if it'll execute migrations
+    #[arg(short, long)]
+    pub migration: Option<bool>,
 }
 
 #[test]
