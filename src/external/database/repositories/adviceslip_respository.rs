@@ -56,4 +56,3 @@ fn delete(id: String) -> Result<usize> {
 
     conn.execute("DELETE FROM adviceslip WHERE id = ?", [&id])
 }
-

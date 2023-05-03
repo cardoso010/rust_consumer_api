@@ -1,7 +1,7 @@
 use reqwest::Error;
 
-use crate::domain::entities::{adviceslip::Adviceslip, chucknorris::ChuckNorris};
 use crate::application::usecases::save_request;
+use crate::domain::entities::{adviceslip::Adviceslip, chucknorris::ChuckNorris};
 use crate::external::http::adviceslip::adviceslip_api::Slip;
 
 #[derive(Debug)]
