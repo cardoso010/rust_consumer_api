@@ -5,6 +5,7 @@ use super::connection::get_connection;
 pub fn execute() -> Result<usize, Error> {
     let conn = get_connection()?;
 
+    println!("Creating migration!");
     conn.execute(
         r#"
         CREATE TABLE IF NOT EXISTS chucknorris (
@@ -14,13 +15,16 @@ pub fn execute() -> Result<usize, Error> {
             created_at  TEXT NOT NULL,
             updated_at  TEXT NOT NULL
         );
+    "#,
+        (),
+    )?;
 
+    conn.execute(
+        r#"
         CREATE TABLE IF NOT EXISTS adviceslip (
             id    INTEGER PRIMARY KEY,
             advice  TEXT NOT NULL
         );
-
-
     "#,
         (),
     )

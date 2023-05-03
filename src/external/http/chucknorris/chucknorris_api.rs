@@ -1,5 +1,4 @@
 use reqwest::Error;
-use serde::{Deserialize, Serialize};
 
 use crate::domain::entities::chucknorris::ChuckNorris;
 

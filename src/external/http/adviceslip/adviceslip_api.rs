@@ -5,7 +5,7 @@ use crate::domain::entities::adviceslip::Adviceslip;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Slip {
-    slip: Adviceslip,
+    pub slip: Adviceslip,
 }
 
 impl Adviceslip {

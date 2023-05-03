@@ -12,7 +12,7 @@ use crate::external::database::migrations;
 async fn main() {
     let cli = Cli::parse();
 
-    if cli.migration.unwrap() {
+    if cli.migration.is_some() {
         migrations::execute().expect("Error to perform migrations!");
     }
 
